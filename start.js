@@ -1,6 +1,7 @@
 let express = require("express");
 let http = require('http');
 const bodyParser = require("body-parser");
+const port = process.env.PORT || 3000;
 let app = express();
 let server = http.Server(app);
 let io = require("socket.io")(server);
@@ -10,7 +11,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json({limit: '50mb', extended: true}));
 
 /* Start Listening */
-server.listen(3000 , function(){
+server.listen(port , function(){
     let host = server.address().address;
     let port = server.address().port;
 
