@@ -1,25 +1,29 @@
-// let userName;
+//  let userName;
 
-// to check is username field is empty or not
+ /* to check is username field is empty or not */
 const isEmpty = str => !str.trim().length;
 
-// getting username for processing
+/*  getting username for processing */
 function mainRedirect(){
     let userName = document.getElementById("user-name").value;
     if(isEmpty(userName)){
         alert("Enter a user name")
     }
     else{
-        openChat(userName)
+        document.getElementById("user-name").inputMode = "none";
+        setTimeout(function() { openChat(userName); }, 500);
+        
     }
 }
 
-// Opens chat
+ /* Opens chat */
 function openChat(userName){
     let getData = new XMLHttpRequest();
     getData.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
-            // console.log("we in")
+            // loading the chat script only when userName is entered
+            sendUserName(userName)
+            loadScript(userName)
             document.getElementById("chat-area").innerHTML = this.responseText;
             var h = window.innerHeight;
             document.getElementById("message-screen").style.height = h +"px";
@@ -29,17 +33,33 @@ function openChat(userName){
     getData.send();
     
 }
-// initialising socket 
-let socket = io();
-
-
-function sendMessage(){
-    let message = document.getElementById("sing-msg").value;
-    document.getElementById("sing-msg").value = ""
-    console.log(message)
-    socket.emit('chat-message', message);
+function loadScript(){
+    let getData = new XMLHttpRequest();
+    getData.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            // console.log("we in")
+            document.getElementById("chat-script").innerHTML = this.responseText;
+        }
+    }
+    getData.open("GET", "/assets/js/chat.js" , true);
+    getData.send();
 }
 
-socket.on('chat-message', function(message){
-    document.getElementById('message-screen').innerHTML += `<div class="msg-cont"><h3 class="p-2 my-1">${message}</h3></div>`
-})
+function sendUserName(userName){
+
+    let uName = {
+        user : userName
+    }
+    uName = JSON.stringify(uName);
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:3000/getUser", true);
+    xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
+    xhttp.send(uName);
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            // If the date is successfully sent to server, update on console
+            console.log('Completion status sent to server')
+        }
+    }
+    
+}

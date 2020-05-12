@@ -17,14 +17,32 @@ server.listen(3000 , function(){
     console.log("Anon chat is live on localhost at port :",port)
 
 })
-
+let userArray = []
 io.on('connection', function(socket){
-    console.log(' a user has entered ' + socket.id );
+    console.log(' a user has entered ' + socket.id + user);
+    let uInfo = {
+        userName : user,
+        userId : socket.id
+    }
+    userArray.push(uInfo)
+    console.log(userArray)
     socket.on('chat-message', function(message){
-        console.log('message: ' + message)
+        console.log('message: ' + message + " " + socket.id)
         io.emit('chat-message', message)
     })
     socket.on('disconnect', function(){
-        console.log(' a user has left ')
+        console.log(' a user has left ' + socket.id)
+        for(let i = 0; i < userArray.length; i++){
+            if(userArray[i].userId === socket.id){
+                userArray.splice(i,1)
+            }
+        }
     })
+})
+
+let user
+app.post("/getUser", function(req, res){
+    console.log(req.body.user)
+    user = req.body.user
+    res.send("request processed")
 })
