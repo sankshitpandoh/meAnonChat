@@ -1,10 +1,45 @@
+.page-wrapper{
+    background-color: #000;
+}
+.get-user-name{
+    height: 100vh;
+    font-family: 'Montserrat-Bold';
+    color: #ffac41;
+    text-align: center;
+}
+.get-user-name input{
+    background-color: #000;
+    border: 0;
+    border-bottom: 1px solid yellow;
+    color: white;
+    font-family: 'Montserrat-Regular';
+}
+.get-user-name input:focus{
+    outline: none;
+}
+.get-user-name button{
+    border: none;
+    background-color: #323232;
+    cursor: pointer;
+    border-radius: 5px ;
+    color: white;
+    transition: 0.5s all;
+}
+.get-user-name button:hover{
+    background-color: white;
+    color:  #323232;
+}
 #message-screen{
     /* height: 85vh; */
     background-color: black;
+    scrollbar-width: none;
     overflow-y: scroll;
     margin-top: -75px;
     padding-top: 75px;
     padding-bottom: 25px;
+}
+::-webkit-scrollbar {
+    display: none;
 }
 #message-screen .msg-cont{
     padding-bottom: 10px;

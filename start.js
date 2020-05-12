@@ -19,7 +19,7 @@ server.listen(3000 , function(){
 })
 
 io.on('connection', function(socket){
-    console.log(' a user has entered');
+    console.log(' a user has entered ' + socket.id );
     socket.on('chat-message', function(message){
         console.log('message: ' + message)
         io.emit('chat-message', message)
