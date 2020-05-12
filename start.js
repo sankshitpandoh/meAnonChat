@@ -28,9 +28,17 @@ io.on('connection', function(socket){
     userArray.push(uInfo)
     console.log(userArray)
     socket.on('chat-message', function(message){
+        let msgUser;
+        for(let i = 0; i < userArray.length; i++){
+            if(userArray[i].userId === socket.id){
+                msgUser = userArray[i].userName;
+                break; 
+            }
+        }
         let msgData = {
             msg : message,
-            identity : socket.id
+            identity : socket.id,
+            user: msgUser
         }
         console.log('message: ' + message + " " + socket.id)
         io.emit('chat-message', msgData)
@@ -47,7 +55,7 @@ io.on('connection', function(socket){
 
 let user
 app.post("/getUser", function(req, res){
-    console.log(req.body.user)
-    user = req.body.user
-    res.send("request processed")
+    console.log(req.body.user);
+    user = req.body.user;
+    res.send("request processed");
 })
