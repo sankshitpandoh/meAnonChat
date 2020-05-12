@@ -5,9 +5,6 @@ let app = express();
 let server = http.Server(app);
 let io = require("socket.io")(server);
 
-// app.get('/', (req, res) => {
-//     res.send('<h1>Hello world</h1>');
-//   });
 
 app.use(express.static('public'));
 app.use(bodyParser.json({limit: '50mb', extended: true}));

@@ -1,11 +1,35 @@
 #message-screen{
-    height: 90vh;
+    /* height: 85vh; */
     background-color: black;
+    overflow-y: scroll;
+    margin-top: -75px;
+    padding-top: 75px;
+    padding-bottom: 25px;
+}
+#message-screen .msg-cont{
+    padding-bottom: 10px;
+    width: 100%;
+}
+#message-screen h3{
+    color: white;
+    background-color: #6c757d ;
+    display: inline-block;
+    max-width: 40%;
+    margin-right: auto;
+    font-size: 18px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    /* overflow: hidden; */
+    /* overflow-wrap: break-word; */
 }
 #message{
-    height: 10vh;
+    height: 75px;
     background-color: black;
     border-top: 2px solid white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 #message #sing-msg{
     background-color: black;
@@ -13,6 +37,9 @@
     border: 0;
     border-bottom: 1px solid yellow;
     color: white;
+}
+#message #sing-msg:focus{
+    outline: none;
 }
 #message .send-button{
     background-color: white;
