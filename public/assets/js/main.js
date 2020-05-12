@@ -52,7 +52,7 @@ function sendUserName(userName){
     }
     uName = JSON.stringify(uName);
     let xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:3000/getUser", true);
+    xhttp.open("POST", "https://me-anon-chat.herokuapp.com/getUser", true);
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
     xhttp.send(uName);
     xhttp.onreadystatechange = function(){
