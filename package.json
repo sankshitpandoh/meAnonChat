@@ -4,6 +4,7 @@
   "description": "An anonymous chat for web",
   "main": "start.js",
   "scripts": {
+    "start" : "npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
