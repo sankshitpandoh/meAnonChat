@@ -92,7 +92,46 @@
     border-top-right-radius: 0px;
     overflow-wrap: anywhere;
     font-family: 'Montserrat-Regular';
-} 
+}
+.members-cont{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0,0.75);
+    transition: 0.5s all;
+    overflow: hidden;
+}
+.members-cont .close-members{
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    transition: 0.5s all;
+}
+.members-cont .close-members:hover{
+    color: grey;
+}
+.members{
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(255,255,255,1);
+    height: 100vh;
+    max-width: 50%;
+    overflow-y: scroll;
+    overflow-wrap: anywhere;
+    scrollbar-width: none;
+}
+.members h2{
+    font-family: 'Montserrat-Bold';
+    font: 18px;
+}
+.members h3{
+    font-family: 'Montserrat-Regular';
+    font: 22px;
+    color: black;
+}
 #message-holder{
     height: 75px;
     background-color: #000;
@@ -101,6 +140,21 @@
     bottom: 0;
     left: 0;
     right: 0;
+}
+#message-holder .show-members{
+    position: fixed;
+    left: 0;
+    color: black;
+    background-color: yellow ;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid yellow;
+    transition: 0.5s all;
+    font-family: 'Montserrat-Bold';
+}
+#message-holder .show-members:hover{
+    color: yellow;
+    background-color: black ;
 }
 #message-holder #sing-msg{
     background-color: #000;

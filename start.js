@@ -59,3 +59,15 @@ app.post("/getUser", function(req, res){
     user = req.body.user;
     res.send("request processed");
 })
+
+
+app.post("/getAllUsers", function(req, res){
+    let allUsers = []
+    for(let i = 0; i < userArray.length; i++){
+        allUsers.push(userArray[i].userName)
+    }
+    allUsers = JSON.stringify(allUsers)
+    res.send(allUsers);
+})
+/* To DO
+ Add differnt room functionality */

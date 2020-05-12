@@ -52,7 +52,7 @@ function sendUserName(userName){
     }
     uName = JSON.stringify(uName);
     let xhttp = new XMLHttpRequest();
-
+    
     /* https://me-anon-chat.herokuapp.com instead of http://localhost:3000 before pushing */
     xhttp.open("POST", "https://me-anon-chat.herokuapp.com/getUser", true);
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
@@ -64,4 +64,34 @@ function sendUserName(userName){
         }
     }
     
+}
+
+let stateCheck = 0
+function showMembers(){
+    let x = document.querySelector(".members");
+    if(stateCheck === 0){
+        let getUnames = new XMLHttpRequest();
+    
+        /* https://me-anon-chat.herokuapp.com instead of http://localhost:3000 before pushing */
+        getUnames.open("POST", "https://me-anon-chat.herokuapp.com/getAllUsers", true);
+        getUnames.setRequestHeader("Content-Type","application/json; charset=utf-8");
+        getUnames.send();
+        getUnames.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200) {
+                let data = JSON.parse(this.response);
+                let x = document.querySelector(".members");
+                x.innerHTML = `<h2 class="px-1">Currently Online:</h2>`;
+                for(let i = 0; i < data.length; i++){
+                    x.innerHTML += `<h3 class="px-1">${data[i]}</h3>`
+                }
+                document.querySelector(".members-cont").style.width = "100%"
+            }
+        }
+        stateCheck = 1;
+    }
+    else{
+        document.querySelector(".members-cont").style.width = "0%";
+        x.innerHTML = ``;
+        stateCheck = 0
+    }
 }
