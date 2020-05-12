@@ -74,6 +74,7 @@
     font-size: 18px;
     border-radius: 5px;
     border-top-left-radius: 0px;
+    overflow-wrap: anywhere;
     font-family: 'Montserrat-Regular';
 }
 #message-screen .msg-cont-own{
@@ -89,6 +90,7 @@
     font-size: 18px;
     border-radius: 5px;
     border-top-right-radius: 0px;
+    overflow-wrap: anywhere;
     font-family: 'Montserrat-Regular';
 } 
 #message-holder{
