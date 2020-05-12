@@ -10,7 +10,7 @@
 .get-user-name input{
     background-color: #000;
     border: 0;
-    border-bottom: 1px solid yellow;
+    border-bottom: 1px solid white;
     color: white;
     font-family: 'Montserrat-Regular';
 }
@@ -45,7 +45,7 @@
     padding-bottom: 10px;
     width: 100%;
 }
-#message-screen h3{
+#message-screen .msg-cont h3{
     color: white;
     background-color: #6c757d ;
     display: inline-block;
@@ -54,31 +54,57 @@
     font-size: 18px;
     border-radius: 5px;
     border-top-left-radius: 0px;
-    /* overflow: hidden; */
-    /* overflow-wrap: break-word; */
+    font-family: 'Montserrat-Regular';
 }
-#message{
+#message-screen .msg-cont-own{
+    padding-bottom: 10px;
+    width: 100%;
+} 
+#message-screen .msg-cont-own h3{
+    color: white;
+    background-color: #01024e ;
+    display: inline-block;
+    max-width: 40%;
+    margin-left: auto;
+    font-size: 18px;
+    border-radius: 5px;
+    border-top-right-radius: 0px;
+    font-family: 'Montserrat-Regular';
+} 
+#message-holder{
     height: 75px;
-    background-color: black;
+    background-color: #000;
     border-top: 2px solid white;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
 }
-#message #sing-msg{
-    background-color: black;
+#message-holder #sing-msg{
+    background-color: #000;
     width: 70%;
     border: 0;
-    border-bottom: 1px solid yellow;
+    border-bottom: 1px solid #ffac41;
     color: white;
+    font-family: 'Montserrat-Regular';
 }
-#message #sing-msg:focus{
+#message-holder #sing-msg:focus{
     outline: none;
 }
-#message .send-button{
+#message-holder .send-button{
     background-color: white;
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
+    height: 45px;
+    width: 45px;
+    font-size: 16px;
+    border-radius: 50%;
+    color: black;
+    transition: 0.5s all;
+}
+#message-holder .send-button:hover{
+    background-color: #000;
+    color: white;
+    border: 1px solid white;
 }

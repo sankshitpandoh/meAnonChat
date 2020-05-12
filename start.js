@@ -28,14 +28,18 @@ io.on('connection', function(socket){
     userArray.push(uInfo)
     console.log(userArray)
     socket.on('chat-message', function(message){
+        let msgData = {
+            msg : message,
+            identity : socket.id
+        }
         console.log('message: ' + message + " " + socket.id)
-        io.emit('chat-message', message)
+        io.emit('chat-message', msgData)
     })
     socket.on('disconnect', function(){
         console.log(' a user has left ' + socket.id)
         for(let i = 0; i < userArray.length; i++){
             if(userArray[i].userId === socket.id){
-                userArray.splice(i,1)
+                userArray.splice(i,1);
             }
         }
     })

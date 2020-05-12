@@ -52,13 +52,14 @@ function sendUserName(userName){
     }
     uName = JSON.stringify(uName);
     let xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "https://me-anon-chat.herokuapp.com/getUser", true);
+    /* https://me-anon-chat.herokuapp.com instead of local host before pushing */
+    xhttp.open("POST", "http://localhost:3000/getUser", true);
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
     xhttp.send(uName);
     xhttp.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
-            // If the date is successfully sent to server, update on console
-            console.log('Completion status sent to server')
+            // If the username is sucessfully sent to server
+            console.log('UserName sucessfully registered')
         }
     }
     
