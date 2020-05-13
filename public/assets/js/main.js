@@ -45,6 +45,7 @@ function loadScript(){
     getData.send();
 }
 
+/* Sends username to server */
 function sendUserName(userName){
 
     let uName = {
@@ -66,7 +67,7 @@ function sendUserName(userName){
     
 }
 
-let stateCheck = 0
+let stateCheck = 0;
 function showMembers(){
     let x = document.querySelector(".members");
     if(stateCheck === 0){
