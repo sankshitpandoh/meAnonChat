@@ -25,7 +25,7 @@ function openChat(userName){
             sendUserName(userName)
             loadScript(userName)
             document.getElementById("chat-area").innerHTML = this.responseText;
-            var h = window.innerHeight;
+            let h = window.innerHeight;
             document.getElementById("message-screen").style.height = h +"px";
         }
     }

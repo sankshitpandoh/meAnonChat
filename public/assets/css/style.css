@@ -53,6 +53,7 @@
     margin-top: -75px;
     padding-top: 75px;
     padding-bottom: 25px;
+    scroll-behavior: smooth;
 }
 ::-webkit-scrollbar {
     display: none;
@@ -183,4 +184,22 @@
     background-color: #000;
     color: white;
     border: 1px solid white;
+}
+#message-holder #is-typing{
+    position: absolute;
+    margin-top: -32px;
+    height: 30px;
+    max-width: 0px;
+    top: 0;
+    left: 0;
+    transition: 0.5s all;
+    background-color: rgba(128, 128, 128, 0.25);
+    border-top-right-radius: 5px;
+    overflow: hidden;
+}
+#message-holder #is-typing p{
+    color: white;
+    font-family: 'Montserrat-Bold';
+    font-size: 12px;
+    transition: 0.5s all;
 }

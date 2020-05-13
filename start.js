@@ -43,6 +43,21 @@ io.on('connection', function(socket){
         console.log('message: ' + message + " " + socket.id)
         io.emit('chat-message', msgData)
     })
+    /*  */
+    socket.on('typing', function(typing){
+        console.log(socket.id + " " + typing);
+        for(let i = 0; i < userArray.length; i++){
+            if(userArray[i].userId === socket.id){
+                let typingData = {
+                    identity : socket.id,
+                    stateType : typing,
+                    user : userArray[i].userName
+                }
+                io.emit('is-typing' , typingData);
+            }
+        }
+
+    })
     socket.on('disconnect', function(){
         console.log(' a user has left ' + socket.id)
         for(let i = 0; i < userArray.length; i++){
