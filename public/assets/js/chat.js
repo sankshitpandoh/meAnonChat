@@ -41,7 +41,7 @@ socket.on('chat-message', function(msgData){
         document.getElementById('message-screen').innerHTML += `<div class="d-flex flex-column msg-cont"><p class="message-info">${msgData.user}</p><h3 class="p-2 my-1">${msgData.msg}</h3></div>`;
     }
 
-    // To auto scroll chat if exceeds viewport
+    /* To auto scroll chat if exceeds viewport */
     let messageAreaHeight = document.getElementById("message-screen").scrollHeight
     if(messageAreaHeight > screenHeight){
         document.getElementById("message-screen").scrollTop = messageAreaHeight;

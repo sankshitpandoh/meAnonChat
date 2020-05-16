@@ -18,8 +18,12 @@ server.listen(port , function(){
     console.log("Anon chat is live on localhost at port :",port)
 
 })
-// main array that contains user data - userName and socket id's
+
+/* main array that contains user data - userName and socket id's */
 let userArray = []
+
+/* main array that contains room information - names */
+let rooms = []
 
 io.on('connection', function(socket){
     console.log(' a user has entered ' + socket.id + user);
@@ -104,6 +108,15 @@ app.post("/getAllUsers", function(req, res){
     }
     allUsers = JSON.stringify(allUsers);
     res.send(allUsers);
+})
+
+app.post("/getRoom", function(req,res){
+    let r = {
+        roomName = req.body.room,
+        creator = user
+    }
+    rooms.push(r);
+    res.send("Room generated sucessfully")
 })
 /* To DO
  Add differnt room functionality */

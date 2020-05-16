@@ -1,11 +1,31 @@
 .page-wrapper{
     background-color: #000;
 }
-.get-user-name{
+
+/* main landing page css starts here */
+.create-room{
     height: 95vh;
-    font-family: 'Montserrat-Bold';
+    border-right: 1px solid #444;
+    cursor: pointer;
     color: #ffac41;
-    text-align: center;
+    font-family: 'Montserrat-Bold';
+    transition: 0.5s all;
+}
+.create-room:hover{
+    background-color: #ffac41;
+    color: #000;
+}
+.join-room{
+    height: 95vh;
+    border-left: 1px solid #444;
+    cursor: pointer;
+    color: #ffac41;
+    font-family: 'Montserrat-Bold';
+    transition: 0.5s all;
+}
+.join-room:hover{
+    background-color: #ffac41;
+    color: #000;
 }
 .dev-info{
     height: 5vh;
@@ -22,6 +42,41 @@
 .dev-info a:hover{
     color: #fff;
     text-decoration-color: #ffac41;
+}
+/* main landing page css ends here */
+
+/* create room page css starts here */
+.create-room-container{
+    height: 100vh;
+    font-family: 'Montserrat-Bold';
+    color: #ffac41;
+}
+.create-room-container input{
+    background-color: #000;
+    border: 0;
+    border-bottom: 1px solid white;
+    color: white;
+    font-family: 'Montserrat-Regular';
+}
+.create-room-container button{
+    border: none;
+    background-color: #323232;
+    cursor: pointer;
+    border-radius: 5px ;
+    color: white;
+    transition: 0.5s all;
+}
+.create-room-container button:hover{
+    background-color: white;
+    color:  #323232;
+}
+/* create room page css ends here */
+
+.get-user-name{
+    height: 95vh;
+    font-family: 'Montserrat-Bold';
+    color: #ffac41;
+    text-align: center;
 }
 .get-user-name input{
     background-color: #000;
@@ -185,6 +240,15 @@
     color: white;
     border: 1px solid white;
 }
+/* #message-holder #file-msg{
+    display: none;
+}
+#message-holder #upload-img{
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    background-color: red;
+} */
 #message-holder #is-typing{
     position: absolute;
     margin-top: -32px;
