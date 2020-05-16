@@ -20,13 +20,12 @@ server.listen(port , function(){
 })
 
 /* main array that contains user data - userName and socket id's */
-let userArray = []
+let userArray = [];
 
 /* main array that contains room information - names */
-let rooms = []
+let rooms = [];
 
 io.on('connection', function(socket){
-
     /* Join the new room specified by user */
     socket.on('room', function(room){
         socket.join(room)
@@ -88,8 +87,7 @@ io.on('connection', function(socket){
                 break;
             }
         }
-        /* emits the who is typing object to all connected sockets */
-        console.log(typing.room)
+        /* emits the who is typing object to all connected sockets in specific room */
         io.sockets.in(typing.room).emit('is-typing' , typingData);
 
     })
@@ -122,13 +120,42 @@ app.post("/getAllUsers", function(req, res){
 })
 
 app.post("/getRoom", function(req,res){
-    let r = {
-        roomName : req.body.room,
-        creator : user
+    console.log(rooms)
+    console.log(rooms.length)
+    let check = 0
+    if(rooms.length != 0){
+        for(let i = 0; i < rooms.length; i++){
+            if(req.body.room === rooms[i].roomName){
+                // res.send(false);
+                check = 1
+
+            }
+        }
+        if(check === 1){
+            res.send(false);
+        }
+        else{
+            let r = {
+                roomName : req.body.room,
+                creator : user
+            }
+            console.log(r)
+            rooms.push(r);
+            res.send(true);
+        }
     }
-    rooms.push(r);
-    console.log(r)
-    res.send("Room generated sucessfully")
+    else{
+        let r = {
+            roomName : req.body.room,
+            creator : user
+        }
+        rooms.push(r);
+        res.send(true);
+    }
+
 })
+
+
 /* To DO
- Add differnt room functionality */
+Add joining room functionality,
+add key codes for joining room not with name so that different rooms with same name can also exist */

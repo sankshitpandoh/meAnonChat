@@ -1,4 +1,5 @@
 //  let userName;
+localStorage.removeItem("roomToJoin");
 
 function createRoom(){
     let getData = new XMLHttpRequest();
@@ -40,7 +41,9 @@ function createAndMainRedirect(){
     else{
         document.getElementById("user-name").inputMode = "none";
         document.getElementById("new-room-name").inputMode = "none";
-        setTimeout(function() { openChat(userName, newRoomName); }, 500);
+        sendUserName(userName);
+        sendRoomName(newRoomName);        
+        // setTimeout(function() { openChat(userName, newRoomName); }, 500);
         
     }
 }
@@ -51,8 +54,8 @@ function openChat(userName, roomName){
     getData.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
             // loading the chat script only when userName is entered
-            sendUserName(userName);
-            sendRoomName(roomName);
+            // sendUserName(userName);
+            // sendRoomName(roomName);
             loadScript();
             document.getElementById("chat-area").innerHTML = this.responseText;
             let h = window.innerHeight;
@@ -92,8 +95,15 @@ function sendRoomName(x){
     xhttp.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
             console.log(x);
+            console.log(this.response)
+            if(this.response == "true"){
+                localStorage.setItem("roomToJoin", x);
+                openChat()
+            }
+            else{
+                alert('A room with same name exists, enter a new name')
+            }
             /* if room name is sucessfully sent to server store it in local storage */
-            localStorage.setItem("roomToJoin", x);
         }
     }
 }
