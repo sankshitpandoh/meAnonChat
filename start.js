@@ -67,7 +67,6 @@ io.on('connection', function(socket){
             identity : socket.id,
             user: msgUser
         }
-        console.log(rDetail)
         // console.log('message: ' + message + " " + socket.id)
 
         /* emits the message object to all connected sockets */
@@ -83,14 +82,15 @@ io.on('connection', function(socket){
             if(userArray[i].userId === socket.id){
                 typingData = {
                     identity : socket.id,
-                    stateType : typing,
+                    stateType : typing.state,
                     user : userArray[i].userName
                 }
                 break;
             }
         }
         /* emits the who is typing object to all connected sockets */
-        io.emit('is-typing' , typingData);
+        console.log(typing.room)
+        io.sockets.in(typing.room).emit('is-typing' , typingData);
 
     })
     socket.on('disconnect', function(){

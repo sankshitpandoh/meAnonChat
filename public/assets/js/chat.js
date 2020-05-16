@@ -25,7 +25,11 @@ document.getElementById("sing-msg").addEventListener("keyup", function(event){
 })
 
 function Usertyping(x){
-    socket.emit('typing', x);
+    let data = {
+        state : x,
+        room : rName
+    }
+    socket.emit('typing', data);
 }
 
 function sendMessage(){
