@@ -34,7 +34,7 @@ function createAndMainRedirect(){
     if(isEmpty(userName)){
         alert("Enter a user name");
     }
-    if(isEmpty(newRoomName)){
+    else if(isEmpty(newRoomName)){
         alert("Enter new room's name");
     }
     else{
@@ -91,8 +91,9 @@ function sendRoomName(x){
     xhttp.send(roomName);
     xhttp.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
-            // If the username is sucessfully sent to server
-            // console.log('UserName sucessfully registered')
+            console.log(x);
+            /* if room name is sucessfully sent to server store it in local storage */
+            localStorage.setItem("roomToJoin", x);
         }
     }
 }
@@ -150,3 +151,4 @@ function showMembers(){
         stateCheck = 0
     }
 }
+

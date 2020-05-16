@@ -26,11 +26,18 @@ let userArray = []
 let rooms = []
 
 io.on('connection', function(socket){
+
+    /* Join the new room specified by user */
+    socket.on('room', function(room){
+        socket.join(room)
+        console.log('in room ' + room)
+    })
+
     console.log(' a user has entered ' + socket.id + user);
     /* creating an object everytime a user joins */
     let uInfo = {
         userName : user,
-        userId : socket.id
+        userId : socket.id,
     }
 
     /* pushing the obect in main array */
@@ -40,8 +47,11 @@ io.on('connection', function(socket){
     /* When chat-message event is received */
     socket.on('chat-message', function(message){
 
-        /* stores the userName from whom the message is received */
+        /* this var stores the userName from whom the message is received */
         let msgUser;
+        console.log(message)
+        /* Stoes the room name where the message is to be sent */
+        let rDetail = message.room;
 
         /* Loops through the main array to get the userName by matching socket id */
         for(let i = 0; i < userArray.length; i++){
@@ -53,14 +63,15 @@ io.on('connection', function(socket){
 
         /* message object that contains message, user name and socket id of sender */
         let msgData = {
-            msg : message,
+            msg : message.msg,
             identity : socket.id,
             user: msgUser
         }
+        console.log(rDetail)
         // console.log('message: ' + message + " " + socket.id)
 
         /* emits the message object to all connected sockets */
-        io.emit('chat-message', msgData);
+        io.sockets.in(rDetail).emit('chat-message', msgData);
     });
 
     /* when a user is typing event is received  */
@@ -112,10 +123,11 @@ app.post("/getAllUsers", function(req, res){
 
 app.post("/getRoom", function(req,res){
     let r = {
-        roomName = req.body.room,
-        creator = user
+        roomName : req.body.room,
+        creator : user
     }
     rooms.push(r);
+    console.log(r)
     res.send("Room generated sucessfully")
 })
 /* To DO

@@ -1,25 +1,42 @@
 /* Initialising socket */ 
 let socket = io();
+
+
+/* getting room name to join from local storage  */
+let rName = localStorage.getItem("roomToJoin"); 
+
+/* Telling server which room we want to join */
+socket.on('connect', function(){
+    socket.emit('room', rName)
+})
+
 let screenHeight = window.innerHeight;
+
 /* Send messages on press of enter key */
 document.getElementById("sing-msg").addEventListener("keyup", function(event){
     if(event.keyCode === 13){
         // event.preventDefault
-        sendMessage()
+        sendMessage();
     }
     else{
         let typing = true;
-        Usertyping(typing)
+        Usertyping(typing);
     }
 })
+
 function Usertyping(x){
     socket.emit('typing', x);
 }
+
 function sendMessage(){
     let message = document.getElementById("sing-msg").value;
+    message = {
+        msg : message,
+        room : rName
+    }
 
      /* checks if message field is empty */
-    if(isEmpty(message)){
+    if(isEmpty(message.msg)){
         /* If empty this block of code runs */
         /* Do nothing */
     }
@@ -33,6 +50,7 @@ function sendMessage(){
 }
 
 socket.on('chat-message', function(msgData){
+    console.log(msgData)
     if(msgData.identity === socket.id){
         document.getElementById('message-screen').innerHTML += `<div class="d-flex msg-cont-own"><h3 class="p-2 my-1">${msgData.msg}</h3></div>`;
 
