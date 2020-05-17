@@ -10,10 +10,12 @@ socket.on('connect', function(){
     socket.emit('room', rId)
 })
 
-let screenHeight = window.innerHeight;
+let screenHeight = window.innerHeight - 75 - 43;
 
 socket.on('rDetails', function(data){
         localStorage.setItem("roomName",  data.roomName);
+        document.getElementById("roomDetails").innerHTML = "";
+        document.getElementById("roomDetails").innerHTML = `<span class="rDetail d-flex align-items-center">Room Name: &nbsp; <p>${data.roomName}</p></span><span class="rDetail d-flex align-items-center">Room Id: &nbsp; <p>${data.id}</p></span>`;
 })
 
 /* Send messages on press of enter key */
@@ -31,7 +33,7 @@ document.getElementById("sing-msg").addEventListener("keyup", function(event){
 function Usertyping(x){
     let data = {
         state : x,
-        room : rName
+        room : rId
     }
     socket.emit('typing', data);
 }
@@ -40,7 +42,7 @@ function sendMessage(){
     let message = document.getElementById("sing-msg").value;
     message = {
         msg : message,
-        room : rName
+        room : rId
     }
 
      /* checks if message field is empty */

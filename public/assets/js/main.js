@@ -59,7 +59,8 @@ function openChat(userName, roomName){
             // sendRoomName(roomName);
             loadScript();
             document.getElementById("chat-area").innerHTML = this.responseText;
-            let h = window.innerHeight;
+            let h = window.innerHeight - 75 - 43;
+            console.log(h)
             document.getElementById("message-screen").style.height = h +"px";
         }
     }
