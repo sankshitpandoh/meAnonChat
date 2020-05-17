@@ -178,6 +178,22 @@ function makeId(){
     return result;
 }
 
+app.post("/checkRoom", function(req,res){
+    let check = 0;
+    for(let i = 0; i < rooms.length; i++){
+        if(rooms[i].id === req.body.id ){
+            check = 1;
+            break;
+        }
+    }
+    if(check = 1){
+        res.send(true);
+    }
+    else{
+        res.send(false);
+    }
+})
+
 /* To DO
 Add joining room functionality,
 add key codes for joining room not with name so that different rooms with same name can also exist */

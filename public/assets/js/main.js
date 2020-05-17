@@ -2,7 +2,7 @@
 localStorage.removeItem("roomToJoin");
 localStorage.removeItem("roomName");
 
-defaultLanding()
+defaultLanding();
 
 function defaultLanding(){
     let getData = new XMLHttpRequest();
@@ -43,7 +43,7 @@ function enterRoom(){
  /* to check if fields are empty or not */
 const isEmpty = str => !str.trim().length;
 
-/*  getting username and room name for processing */
+/*  getting username and room name for processing when user creates a new room */
 function createAndMainRedirect(){
     let userName = document.getElementById("user-name").value;
     let newRoomName = document.getElementById("new-room-name").value;
@@ -63,8 +63,51 @@ function createAndMainRedirect(){
     }
 }
 
- /* Opens chat after a new room has been created*/
-function openChat(userName, roomName){
+/* When user asks to join an existing room */
+function enterAndMainRedirect(){
+    let userName = document.getElementById("user-name").value;
+    let roomId = document.getElementById("room-join-id").value;
+    if(isEmpty(userName)){
+        alert("Enter a user name");
+    }
+    else if(isEmpty(roomId)){
+        alert("New room's name field cannot be empty");
+    }
+    else{
+        checkRoomId(roomId, userName);
+    }
+}
+
+function checkRoomId(x,y){
+    let roomId = {
+        id : x
+    }
+    roomId = JSON.stringify(roomId);
+    let xhttp = new XMLHttpRequest();
+    
+    /* https://me-anon-chat.herokuapp.com instead of http://localhost:3000 before pushing */
+    xhttp.open("POST", "http://localhost:3000/checkRoom", true);
+    xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
+    xhttp.send(roomId);
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(x);
+            console.log(this.response)
+            if(this.response == "false"){
+                alert('A room with this Id doesnot exist');
+            }
+            else{
+                /* if room Id exists then*/
+                localStorage.setItem("roomToJoin", x);
+                sendUserName(y)
+                openChat()
+            }
+        }
+    }
+}
+
+ /* Opens chat after a new room has been created or confirmed*/
+function openChat(){
     let getData = new XMLHttpRequest();
     getData.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
@@ -94,7 +137,7 @@ function loadScript(){
     getData.send();
 }
 
-/* Sends roomName to server */
+/* Sends roomName to server for processing */
 function sendRoomName(x){
     let roomName = {
         room : x
