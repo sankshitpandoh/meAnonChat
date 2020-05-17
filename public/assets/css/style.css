@@ -45,6 +45,20 @@
 }
 /* main landing page css ends here */
 
+.back{
+    position: fixed;
+    left: 5px;
+    top: 5px;
+}
+.back i{
+    font-size: 30px;
+    transition: 0.5s all;
+    color: #ffac41;
+}
+.back i:hover{
+    color: white;
+    cursor: pointer;
+}
 /* create room page css starts here */
 .create-room-container{
     height: 100vh;
@@ -71,6 +85,33 @@
     color:  #323232;
 }
 /* create room page css ends here */
+
+/* enter room page css starts here */
+.enter-room-container{
+    height: 100vh;
+    font-family: 'Montserrat-Bold';
+    color: #ffac41;
+}
+.enter-room-container input{
+    background-color: #000;
+    border: 0;
+    border-bottom: 1px solid white;
+    color: white;
+    font-family: 'Montserrat-Regular';
+}
+.enter-room-container button{
+    border: none;
+    background-color: #323232;
+    cursor: pointer;
+    border-radius: 5px ;
+    color: white;
+    transition: 0.5s all;
+}
+.enter-room-container button:hover{
+    background-color: white;
+    color:  #323232;
+}
+/* enter room page css ends here */
 
 .get-user-name{
     height: 95vh;

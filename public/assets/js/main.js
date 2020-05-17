@@ -2,6 +2,20 @@
 localStorage.removeItem("roomToJoin");
 localStorage.removeItem("roomName");
 
+defaultLanding()
+
+function defaultLanding(){
+    let getData = new XMLHttpRequest();
+    getData.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            
+            document.getElementById("chat-area").innerHTML = this.responseText;
+        }
+    }
+    getData.open("GET", "/landing.html" , true);
+    getData.send();
+}
+
 function createRoom(){
     let getData = new XMLHttpRequest();
     getData.onreadystatechange = function(){
@@ -26,10 +40,10 @@ function enterRoom(){
     getData.send();
 }
 
- /* to check is username field is empty or not */
+ /* to check if fields are empty or not */
 const isEmpty = str => !str.trim().length;
 
-/*  getting username for processing */
+/*  getting username and room name for processing */
 function createAndMainRedirect(){
     let userName = document.getElementById("user-name").value;
     let newRoomName = document.getElementById("new-room-name").value;
@@ -37,7 +51,7 @@ function createAndMainRedirect(){
         alert("Enter a user name");
     }
     else if(isEmpty(newRoomName)){
-        alert("Enter new room's name");
+        alert("New room's name field cannot be empty");
     }
     else{
         document.getElementById("user-name").inputMode = "none";
@@ -49,18 +63,16 @@ function createAndMainRedirect(){
     }
 }
 
- /* Opens chat */
+ /* Opens chat after a new room has been created*/
 function openChat(userName, roomName){
     let getData = new XMLHttpRequest();
     getData.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
-            // loading the chat script only when userName is entered
-            // sendUserName(userName);
-            // sendRoomName(roomName);
+            /* loading the chat script to main document */
             loadScript();
             document.getElementById("chat-area").innerHTML = this.responseText;
-            let h = window.innerHeight - 75 - 43;
-            console.log(h)
+            let h = window.innerHeight - 75 - 43; /* subtracting message send bar height and room detaills display height */
+            // console.log(h)
             document.getElementById("message-screen").style.height = h +"px";
         }
     }
@@ -102,10 +114,10 @@ function sendRoomName(x){
                 alert('Oh snap! An error occured, try again please')
             }
             else{
+                /* if room name is sucessfully sent to server store the response which contains room id in local storage */
                 localStorage.setItem("roomToJoin", this.response);
                 openChat()
             }
-            /* if room name is sucessfully sent to server store it in local storage */
         }
     }
 }

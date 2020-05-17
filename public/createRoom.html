@@ -1,4 +1,10 @@
 <div class="create-room-container d-flex flex-column justify-content-center align-items-center">
+    
+    <div class="back">
+        <i title="Go Back" class="fa fa-arrow-left" onclick="defaultLanding()"></i>
+    </div>
+
+    <h1 class="mb-5">Create a new Room</h1>
 
     <h2 class="text-center">Enter room name:</h2>
     <input class="mb-5" type="text" id="new-room-name" required/>
@@ -6,5 +12,5 @@
     <h2 class="text-center">Enter Username:</h2>
     <input class="mb-5" type="text" id="user-name" required/>
 
-    <button onclick="createAndMainRedirect()">Create and join room</button>
+    <button onclick="createAndMainRedirect()">Create and Join</button>
 </div>

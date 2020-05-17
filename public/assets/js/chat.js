@@ -10,7 +10,7 @@ socket.on('connect', function(){
     socket.emit('room', rId)
 })
 
-let screenHeight = window.innerHeight - 75 - 43;
+let screenHeight = window.innerHeight - 75 - 43; /* subtracting message send bar height and room detaills display height from total inner window height */
 
 socket.on('rDetails', function(data){
         localStorage.setItem("roomName",  data.roomName);
