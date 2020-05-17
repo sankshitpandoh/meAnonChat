@@ -43,10 +43,11 @@ io.on('connection', function(socket){
 
     })
 
-    console.log(' a user has entered ' + socket.id + user);
+    console.log(' a user has entered ' + socket.id + sUser);
     /* creating an object everytime a user joins */
     let uInfo = {
-        userName : user,
+        userName : sUser.user,
+        inRoom : sUser.whichRoom,
         userId : socket.id,
     }
 
@@ -113,26 +114,27 @@ io.on('connection', function(socket){
     })
 })
 
-let user
+let sUser;
 app.post("/getUser", function(req, res){
-    console.log(req.body.user);
-    user = req.body.user;
+    console.log(req.body);
+    sUser = req.body;
     res.send("request processed");
 })
 
 
 app.post("/getAllUsers", function(req, res){
     let allUsers = [];
+    console.log(req.body.id + "here")
     for(let i = 0; i < userArray.length; i++){
-        allUsers.push(userArray[i].userName);
+        if(userArray[i].inRoom == req.body.id){
+            allUsers.push(userArray[i].userName);
+        }
     }
     allUsers = JSON.stringify(allUsers);
     res.send(allUsers);
 })
 
 app.post("/getRoom", function(req,res){
-    console.log(rooms)
-    console.log(rooms.length)
     let uniqueId = makeId()
     let check = 0
     if(rooms.length != 0){
@@ -147,10 +149,8 @@ app.post("/getRoom", function(req,res){
         else{
             let r = {
                 roomName : req.body.room,
-                creator : user,
                 id : uniqueId
             }
-            console.log(r)
             rooms.push(r);
             res.send(uniqueId);
         }
@@ -158,10 +158,8 @@ app.post("/getRoom", function(req,res){
     else{
         let r = {
             roomName : req.body.room,
-            creator : user,
             id : uniqueId
         }
-        console.log(r)
         rooms.push(r);
         res.send(uniqueId);
     }
@@ -186,14 +184,10 @@ app.post("/checkRoom", function(req,res){
             break;
         }
     }
-    if(check = 1){
+    if(check === 1){
         res.send(true);
     }
     else{
         res.send(false);
     }
 })
-
-/* To DO
-Add joining room functionality,
-add key codes for joining room not with name so that different rooms with same name can also exist */

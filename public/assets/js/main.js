@@ -56,8 +56,7 @@ function createAndMainRedirect(){
     else{
         document.getElementById("user-name").inputMode = "none";
         document.getElementById("new-room-name").inputMode = "none";
-        sendUserName(userName);
-        sendRoomName(newRoomName);        
+        sendRoomName(newRoomName,userName);        
         // setTimeout(function() { openChat(userName, newRoomName); }, 500);
         
     }
@@ -95,6 +94,7 @@ function checkRoomId(x,y){
             console.log(this.response)
             if(this.response == "false"){
                 alert('A room with this Id doesnot exist');
+                document.getElementById("room-join-id").value = ""
             }
             else{
                 /* if room Id exists then*/
@@ -138,7 +138,7 @@ function loadScript(){
 }
 
 /* Sends roomName to server for processing */
-function sendRoomName(x){
+function sendRoomName(x,y){
     let roomName = {
         room : x
     }
@@ -159,6 +159,7 @@ function sendRoomName(x){
             else{
                 /* if room name is sucessfully sent to server store the response which contains room id in local storage */
                 localStorage.setItem("roomToJoin", this.response);
+                sendUserName(y);
                 openChat()
             }
         }
@@ -168,8 +169,11 @@ function sendRoomName(x){
 /* Sends username to server */
 function sendUserName(userName){
 
+    let x = localStorage.getItem("roomToJoin");
+
     let uName = {
-        user : userName
+        user : userName,
+        whichRoom : x
     }
     uName = JSON.stringify(uName);
     let xhttp = new XMLHttpRequest();
@@ -193,12 +197,17 @@ let stateCheck = 0;
 function showMembers(){
     let x = document.querySelector(".members");
     if(stateCheck === 0){
+        let d = localStorage.getItem("roomToJoin");
+        let details = {
+            id : d
+        }
+        details = JSON.stringify(details);
         let getUnames = new XMLHttpRequest();
     
         /* https://me-anon-chat.herokuapp.com instead of http://localhost:3000 before pushing */
         getUnames.open("POST", "http://localhost:3000/getAllUsers", true);
         getUnames.setRequestHeader("Content-Type","application/json; charset=utf-8");
-        getUnames.send();
+        getUnames.send(details);
         getUnames.onreadystatechange = function(){
             if (this.readyState == 4 && this.status == 200) {
                 let data = JSON.parse(this.response);
