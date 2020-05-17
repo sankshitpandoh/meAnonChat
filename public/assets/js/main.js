@@ -84,8 +84,8 @@ function checkRoomId(x,y){
     roomId = JSON.stringify(roomId);
     let xhttp = new XMLHttpRequest();
     
-    /* https://me-anon-chat.herokuapp.com instead of http://localhost:3000 before pushing */
-    xhttp.open("POST", "http://localhost:3000/checkRoom", true);
+    /* https://me-anon-chat.herokuapp.com instead of https://me-anon-chat.herokuapp.com before pushing */
+    xhttp.open("POST", "https://me-anon-chat.herokuapp.com/checkRoom", true);
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
     xhttp.send(roomId);
     xhttp.onreadystatechange = function(){
@@ -145,8 +145,8 @@ function sendRoomName(x,y){
     roomName = JSON.stringify(roomName);
     let xhttp = new XMLHttpRequest();
     
-    /* https://me-anon-chat.herokuapp.com instead of http://localhost:3000 before pushing */
-    xhttp.open("POST", "http://localhost:3000/getRoom", true);
+    /* https://me-anon-chat.herokuapp.com instead of https://me-anon-chat.herokuapp.com before pushing */
+    xhttp.open("POST", "https://me-anon-chat.herokuapp.com/getRoom", true);
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
     xhttp.send(roomName);
     xhttp.onreadystatechange = function(){
@@ -178,8 +178,8 @@ function sendUserName(userName){
     uName = JSON.stringify(uName);
     let xhttp = new XMLHttpRequest();
     
-    /* https://me-anon-chat.herokuapp.com instead of http://localhost:3000 before pushing */
-    xhttp.open("POST", "http://localhost:3000/getUser", true);
+    /* https://me-anon-chat.herokuapp.com instead of https://me-anon-chat.herokuapp.com before pushing */
+    xhttp.open("POST", "https://me-anon-chat.herokuapp.com/getUser", true);
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
     xhttp.send(uName);
     xhttp.onreadystatechange = function(){
@@ -204,8 +204,8 @@ function showMembers(){
         details = JSON.stringify(details);
         let getUnames = new XMLHttpRequest();
     
-        /* https://me-anon-chat.herokuapp.com instead of http://localhost:3000 before pushing */
-        getUnames.open("POST", "http://localhost:3000/getAllUsers", true);
+        /* https://me-anon-chat.herokuapp.com instead of https://me-anon-chat.herokuapp.com before pushing */
+        getUnames.open("POST", "https://me-anon-chat.herokuapp.com/getAllUsers", true);
         getUnames.setRequestHeader("Content-Type","application/json; charset=utf-8");
         getUnames.send(details);
         getUnames.onreadystatechange = function(){
