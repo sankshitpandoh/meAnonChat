@@ -27,9 +27,20 @@ let rooms = [];
 
 io.on('connection', function(socket){
     /* Join the new room specified by user */
-    socket.on('room', function(room){
-        socket.join(room)
-        console.log('in room ' + room)
+    socket.on('room', function(roomId){
+        socket.join(roomId)
+        console.log('in room ' + roomId)
+        let r
+        for(let i = 0; i < rooms.length; i++){
+            if(roomId === rooms[i].id){
+                r = {
+                    roomName : rooms[i].roomName,
+                    id : roomId
+                }
+            }
+        }
+        io.sockets.in(roomId).emit('rDetails', r);
+
     })
 
     console.log(' a user has entered ' + socket.id + user);
@@ -122,13 +133,12 @@ app.post("/getAllUsers", function(req, res){
 app.post("/getRoom", function(req,res){
     console.log(rooms)
     console.log(rooms.length)
+    let uniqueId = makeId()
     let check = 0
     if(rooms.length != 0){
         for(let i = 0; i < rooms.length; i++){
-            if(req.body.room === rooms[i].roomName){
-                // res.send(false);
+            if(uniqueId === rooms[i].id){
                 check = 1
-
             }
         }
         if(check === 1){
@@ -137,24 +147,36 @@ app.post("/getRoom", function(req,res){
         else{
             let r = {
                 roomName : req.body.room,
-                creator : user
+                creator : user,
+                id : uniqueId
             }
             console.log(r)
             rooms.push(r);
-            res.send(true);
+            res.send(uniqueId);
         }
     }
     else{
         let r = {
             roomName : req.body.room,
-            creator : user
+            creator : user,
+            id : uniqueId
         }
+        console.log(r)
         rooms.push(r);
-        res.send(true);
+        res.send(uniqueId);
     }
 
 })
 
+function makeId(){
+    let result = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for(let i = 0; i < 7; i++){
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 
 /* To DO
 Add joining room functionality,

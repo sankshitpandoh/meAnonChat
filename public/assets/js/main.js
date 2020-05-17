@@ -1,5 +1,6 @@
 //  let userName;
 localStorage.removeItem("roomToJoin");
+localStorage.removeItem("roomName");
 
 function createRoom(){
     let getData = new XMLHttpRequest();
@@ -96,12 +97,12 @@ function sendRoomName(x){
         if (this.readyState == 4 && this.status == 200) {
             console.log(x);
             console.log(this.response)
-            if(this.response == "true"){
-                localStorage.setItem("roomToJoin", x);
-                openChat()
+            if(this.response == "false"){
+                alert('Oh snap! An error occured, try again please')
             }
             else{
-                alert('A room with same name exists, enter a new name')
+                localStorage.setItem("roomToJoin", this.response);
+                openChat()
             }
             /* if room name is sucessfully sent to server store it in local storage */
         }

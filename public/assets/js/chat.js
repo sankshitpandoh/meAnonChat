@@ -3,14 +3,18 @@ let socket = io();
 
 
 /* getting room name to join from local storage  */
-let rName = localStorage.getItem("roomToJoin"); 
+let rId = localStorage.getItem("roomToJoin"); 
 
 /* Telling server which room we want to join */
 socket.on('connect', function(){
-    socket.emit('room', rName)
+    socket.emit('room', rId)
 })
 
 let screenHeight = window.innerHeight;
+
+socket.on('rDetails', function(data){
+        localStorage.setItem("roomName",  data.roomName);
+})
 
 /* Send messages on press of enter key */
 document.getElementById("sing-msg").addEventListener("keyup", function(event){
