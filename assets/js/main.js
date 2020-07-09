@@ -85,7 +85,7 @@ function checkRoomId(x,y){
     let xhttp = new XMLHttpRequest();
     
     /* https://me-anon-chat.herokuapp.com instead of https://me-anon-chat.herokuapp.com before pushing */
-    xhttp.open("POST", "https://me-anon-chat.herokuapp.com/checkRoom", true);
+    xhttp.open("POST", "https://my-anon-chat-server.herokuapp.com/checkRoom", true);
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
     xhttp.send(roomId);
     xhttp.onreadystatechange = function(){
@@ -146,7 +146,7 @@ function sendRoomName(x,y){
     let xhttp = new XMLHttpRequest();
     
     /* https://me-anon-chat.herokuapp.com instead of https://me-anon-chat.herokuapp.com before pushing */
-    xhttp.open("POST", "https://me-anon-chat.herokuapp.com/getRoom", true);
+    xhttp.open("POST", "https://my-anon-chat-server.herokuapp.com/getRoom", true);
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
     xhttp.send(roomName);
     xhttp.onreadystatechange = function(){
@@ -179,7 +179,7 @@ function sendUserName(userName){
     let xhttp = new XMLHttpRequest();
     
     /* https://me-anon-chat.herokuapp.com instead of https://me-anon-chat.herokuapp.com before pushing */
-    xhttp.open("POST", "https://me-anon-chat.herokuapp.com/getUser", true);
+    xhttp.open("POST", "https://my-anon-chat-server.herokuapp.com/getUser", true);
     xhttp.setRequestHeader("Content-Type","application/json; charset=utf-8");
     xhttp.send(uName);
     xhttp.onreadystatechange = function(){
@@ -205,7 +205,7 @@ function showMembers(){
         let getUnames = new XMLHttpRequest();
     
         /* https://me-anon-chat.herokuapp.com instead of https://me-anon-chat.herokuapp.com before pushing */
-        getUnames.open("POST", "https://me-anon-chat.herokuapp.com/getAllUsers", true);
+        getUnames.open("POST", "https://my-anon-chat-server.herokuapp.com/getAllUsers", true);
         getUnames.setRequestHeader("Content-Type","application/json; charset=utf-8");
         getUnames.send(details);
         getUnames.onreadystatechange = function(){
