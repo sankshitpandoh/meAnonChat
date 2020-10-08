@@ -73,7 +73,7 @@ socket.on('chat-message', function(msgData){
     let messageAreaHeight = document.getElementById("message-screen").scrollHeight
     if(messageAreaHeight > screenHeight){
         document.getElementById("message-screen").scrollTop = messageAreaHeight;
-        screenHeight = messageAreaHeight
+        screenHeight = messageAreaHeight;
     }
 })
 
