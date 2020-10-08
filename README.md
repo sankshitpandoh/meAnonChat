@@ -9,6 +9,20 @@ Made by using:
 - Socket.io
 - HTML & CSS
 
+
+# Contributing
+
+### Pull request raised here would be considered for Hacktober fest 2020.
+#### Thanks Hacktober army for helping me out.
+
+- Fork this repo 
+- Clone the forked repo
+- Create a new brnach
+- Make changes to that branch
+- Push the changes to the forked repo
+- Raise a PR. 
+- If everything goes well, your PR will be merged by me in few hours. :)
+
 # Features
 - Create a new room.
 - Share room id with friends for them to join the room.
